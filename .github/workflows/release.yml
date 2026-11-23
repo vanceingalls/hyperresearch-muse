@@ -1,0 +1,40 @@
+name: Publish skill zip
+
+# On every push to main, rebuild the installable skill zip and publish it
+# to the rolling "latest" GitHub Release, so the download link in the
+# README always serves the current version of the skill.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Build the skill zip
+        run: |
+          # The zip must contain the deep-research/ folder at its root:
+          # that folder is the installable unit Muse unzips into the
+          # user's custom skills folder.
+          zip -r deep-research-skill.zip deep-research \
+            -x "*/__pycache__/*" "*.pyc"
+          unzip -l deep-research-skill.zip
+
+      - name: Publish to the rolling "latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view latest >/dev/null 2>&1; then
+            gh release create latest \
+              --title "Latest skill build" \
+              --notes "Rolling release: the current deep-research skill zip, rebuilt automatically on every push to main. Download deep-research-skill.zip, attach it in a Muse chat, and ask Muse to install it (see the repo README)."
+          fi
+          gh release upload latest deep-research-skill.zip --clobber
