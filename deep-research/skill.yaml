@@ -1,0 +1,5 @@
+name: "deep_research"
+title: "Deep Research"
+description: "Run a tiered deep-research pipeline with parallel subagents: decompose, sweep, investigate, reconcile, draft three ways, synthesize, then adversarially critique and patch a cited report."
+category: "Work and knowledge"
+include_in_prompt: false
