@@ -8,7 +8,7 @@ It is not a fork of the upstream codebase and shares no code with it beyond the 
 
 ## Install
 
-1. Download the skill zip from the rolling release: **[deep-research-skill.zip](https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip)**. It contains the `deep-research/` folder and is rebuilt automatically on every push to `main`, so that link always serves the current version. (Alternatively, download this repository as a zip and use the `deep-research/` folder inside it.)
+1. Download this repository as a zip, or zip just the `deep-research/` folder.
 2. Start a chat with your Muse (phone, desktop, or web), attach the zip, and paste:
 
 > Install the Deep Research skill from the attached zip. If the zip is the whole repository, use the `deep-research` folder inside it; if it is the skill folder itself, use that. Place the `deep-research` folder in my custom skills folder with its `SKILL.md`, `skill.yaml`, `LICENSE`, `references/` folder, and `scripts/` folder intact. Then confirm it is installed by telling me the skill name and what it does, and briefly explain how I use it.
@@ -131,9 +131,6 @@ During development, reports from an early version of this port were scored on th
 ## Repository contents
 
 ```
-.github/workflows/
-  release.yml              on push to main: rebuilds deep-research-skill.zip and
-                           publishes it to the rolling "latest" release
 README.md                  this file
 LICENSE                    MIT license for this repo's additions
 deep-research/             the Muse skill (the installable unit)
