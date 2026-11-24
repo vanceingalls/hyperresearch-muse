@@ -1,14 +1,31 @@
-# hyperresearch-muse
+<h1 align="center">hyperresearch-muse</h1>
 
-A community port of [Hyperresearch](https://github.com/jordan-gibbs/hyperresearch) by Jordan Gibbs (MIT) for **Meta Muse**, Meta's personal agent.
+<p align="center"><strong>Deep research that survives cross-examination — now running inside Muse.</strong></p>
 
-This repository contains one thing: the **`deep-research/` Muse skill**. It re-expresses Hyperresearch's deep-research pipeline — decompose, sweep, investigate in parallel, reconcile, draft three ways, synthesize, critique, patch, cite-check, polish — using Muse's own subagents, web search, and browser tools instead of the upstream Python CLI.
+<p align="center">
+  <a href="https://github.com/jordan-gibbs/hyperresearch"><img alt="Port of Hyperresearch v0.13.3" src="https://img.shields.io/badge/port%20of-Hyperresearch%20v0.13.3-1A1F2E"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-6B8FBF"></a>
+  <a href="https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip"><img alt="Download the latest skill zip" src="https://img.shields.io/badge/download-latest%20skill%20zip-6B8FBF"></a>
+  <img alt="Runs in Meta Muse — phone, desktop, web" src="https://img.shields.io/badge/runs%20in-Meta%20Claude-3D4A5C">
+</p>
 
-It is not a fork of the upstream codebase and shares no code with it beyond the bookkeeping helper written for this port. There is no pip package, hosted API, MCP server, SQLite vault, or Stop hook in this repo — see [What differs on Muse](#what-differs-on-claude) for exactly what the port does and does not do.
+<p align="center">
+  <a href="#install">Install</a> · <a href="#see-a-run">See a run</a> · <a href="#how-it-works">How it works</a> · <a href="#upstream-vs-this-port">Differences</a> · <a href="#evaluation-note">Evaluation</a> · <a href="#faq">FAQ</a>
+</p>
+
+## What is this?
+
+[Hyperresearch](https://github.com/jordan-gibbs/hyperresearch), by Jordan Gibbs, is a deep-research pipeline for coding agents: instead of answering from one pass of searching, it decomposes a question, sweeps sources from several angles, sends investigators to argue positions, drafts the answer three different ways, then attacks the result with critics before patching and cite-checking it.
+
+This repo is a **community port of that pipeline to Meta Muse** — one self-contained skill folder (`deep-research/`) that Muse runs with its own subagents, search, and browser. No pip CLI, no API keys, no server of yours. Because Muse skills execute in Muse's workspace rather than on a device, a run you start on your phone can be picked up in the same chat on your desktop.
+
+**Cited / Adversarial / Tiered / Yours** — every claim tied to a source note · four critics attack the draft before you see it · light or full depth, chosen per question · runs on your normal Muse plan.
 
 ## Install
 
-**Option A — let Muse fetch it (easiest, works from mobile).** Paste this prompt into any chat with your Muse — it's also kept in [INSTALL-PROMPT.md](INSTALL-PROMPT.md):
+The same steps work in the Muse app on **mobile, desktop, or web** — nothing installs on your device.
+
+**Option A — let Muse fetch it.** Paste this prompt into any chat with your Muse (also kept in [INSTALL-PROMPT.md](INSTALL-PROMPT.md)):
 
 ```
 Install the Deep Research skill for me from its GitHub repo.
@@ -28,29 +45,61 @@ Install the Deep Research skill for me from its GitHub repo.
    Tell me I can start by asking you for deep research on any question.
 ```
 
-Pasting the same prompt again later upgrades you to the newest version.
+Pasting the same prompt again later upgrades you to the newest version — the download link always serves the latest build, which is republished automatically on every push to `main`.
 
-**Option B — attach the zip yourself.**
+**Option B — attach the zip yourself.** Download **[deep-research-skill.zip](https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip)**, attach it in a Muse chat, and ask Muse to install the `deep-research` folder into your custom skills folder with its contents intact.
 
-1. Download the skill zip from the rolling release: **[deep-research-skill.zip](https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip)**. It contains the `deep-research/` folder and is rebuilt automatically on every push to `main`, so that link always serves the current version. (Alternatively, download this repository as a zip and use the `deep-research/` folder inside it.)
-2. Start a chat with your Muse (phone, desktop, or web), attach the zip, and paste:
+Then ask your Muse for deep research on any question.
 
-> Install the Deep Research skill from the attached zip. If the zip is the whole repository, use the `deep-research` folder inside it; if it is the skill folder itself, use that. Place the `deep-research` folder in my custom skills folder with its `SKILL.md`, `skill.yaml`, `LICENSE`, `references/` folder, and `scripts/` folder intact. Then confirm it is installed by telling me the skill name and what it does, and briefly explain how I use it.
+## See a run
 
-3. Ask your Muse for deep research on a question.
+**The question** (a real evaluation task): *"My breathing gets worse within minutes of using my new blue rescue inhaler, and my home oxygen readings have dropped from about 95% to 91%. Should I just stop using it?"*
 
-No API keys or extra accounts are needed for this skill. It runs on your Muse plan, inside Muse's workspace — nothing executes on your phone or computer. Because runs live in the workspace rather than on a device, a run started on your phone can be picked up in the same chat on your desktop; there are no local files to sync by hand.
+**What came back** — the opening of the report this pipeline produced during its DRACO evaluation:
 
-## How a run works
+> ## The short answer
+>
+> No — this does not sound like a normal "adjustment period," and you should not simply push through it. A rescue inhaler (typically albuterol/salbutamol, a short-acting beta-agonist) is supposed to relieve wheezing and chest tightness within minutes. Getting *worse* within minutes of using it, repeatedly, over three weeks — together with home oxygen readings falling from your usual ~95% to 91% — is a pattern that needs **urgent, same-day medical attention…**
+>
+> ### Paradoxical bronchospasm — the inhaler narrowing the airways instead of opening them
+>
+> This is the explanation that most closely matches your description: wheezing and tightness that *worsen within minutes of a dose*. The FDA-approved prescribing information for albuterol sulfate inhalation aerosol states that it "can produce paradoxical bronchospasm, which may be life threatening," that if it occurs the inhaler "should be discontinued immediately and alternative therapy should be instituted," and that it "frequently occurs with the first use of a new canister." (DailyMed, Albuterol Sulfate Inhalation Aerosol label: https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=fd0389e0-3713-42e0-8ef2-3bb97676fded&version=2)
 
-When you ask for deep research, Muse acts as the **orchestrator**: it sequences the pipeline steps, spawns subagents for the steps that call for them, and records progress. It does not do a step's research or drafting itself when the step assigns that work to subagents, and it loads one step's procedure at a time from `deep-research/references/pipeline-steps.md`.
+Every claim in the full report is tied to a source like that one — a verbatim quote, a source name, and a URL. Claims that can't be tied down get flagged, not smoothed over. (Full methodology and caveats: [Evaluation note](#evaluation-note).)
+
+Other shapes of question it handles: **Fact-check a claim** ("Did X really say Y, and what's the primary source?") · **Compare two options** ("Which of these two machines fits these constraints?") · **Sweep a literature** ("What's the current expert consensus on Z, and where do the experts disagree?")
+
+## How it works
+
+When you ask for deep research, Muse acts as the **orchestrator**: it sequences the steps below, spawns subagents for the steps that call for them, and records progress. It does not do a step's research or drafting itself when the step assigns that work to subagents, and it loads one step's procedure at a time from `deep-research/references/pipeline-steps.md`.
+
+```mermaid
+flowchart LR
+    A["1 · Decompose"] --> B["2 · Width sweep"]
+    B --> C["3 · Contradiction graph"]
+    C --> D["4 · Loci analysis"]
+    D --> E["5 · Depth investigation"]
+    E --> F["6 · Reconcile"]
+    F --> G["7 · Source tensions"]
+    G --> H["8 · Corpus critic"]
+    H --> I["9 · Evidence digest"]
+    I --> J["10 · Triple draft"]
+    J --> K["11 · Synthesize"]
+    K --> L["12 · Critics ×4"]
+    L --> M["13 · Gap fetch"]
+    M --> N["14 · Patcher"]
+    N --> O["14.5 · Cite check"]
+    O --> P["15 · Polish"]
+    P --> Q["16 · Readability audit"]
+```
 
 Two tiers, chosen when the run starts:
 
-- **Light** — 5 recorded steps (1, 2, 10, 15, 16). For narrow factual questions. The triple draft works directly from the width-sweep notes.
-- **Full** — the complete sequence: steps 1–16 plus the inserted step 14.5 cite-check (17 manifest entries). The default for contested, multi-part, or high-stakes questions.
+- **Light** — steps 1, 2, 10, 15, 16. For narrow factual questions; the triple draft works directly from the width-sweep notes.
+- **Full** — the complete sequence above (steps 1–16 plus the inserted 14.5 cite-check). The default for contested, multi-part, or high-stakes questions.
 
-The full sequence, in order:
+<details>
+<summary><strong>Every step, in order</strong> — job, and what it produces</summary>
 
 | Step | What happens |
 |---|---|
@@ -72,7 +121,7 @@ The full sequence, in order:
 | 15. Polish | Hygiene pass: structure, headings, citation format, repetition. |
 | 16. Readability audit | A fresh-reader pass scores clarity and suggests concrete fixes; only substance-preserving suggestions are applied. The run's finish gate is checked at the end of this step. |
 
-Every factual claim in notes and drafts must tie to a source note with a verbatim quote, a source name, and a URL. Claims that can't be tied down are flagged, not smoothed over.
+</details>
 
 ### What you get back
 
@@ -80,79 +129,61 @@ Every factual claim in notes and drafts must tie to a source note with a verbati
 - A short chat summary: headline findings, the strongest tensions the research surfaced, and the known limitations recorded by the corpus critic.
 - A statement of which tier ran and which steps that tier skipped, so you can judge how much machinery stands behind the report.
 
-### Projects and runs
+Research is organized as **projects** (one folder per research domain, with a notes pool shared across its questions) and **runs** (one question each, identified by a vault tag like `what-is-the-best-ev-a1b2c3`). Later questions in a project start from earlier sources.
 
-Research is organized as **projects** and **runs**:
+## Upstream vs. this port
 
-- A **project** is a folder for one research domain. Its notes pool is shared, so later questions in the same project start from earlier sources.
-- A **run** is one question inside a project, identified by a **vault tag** (a slug from the question plus 6 hex characters, e.g. `what-is-the-best-ev-a1b2c3`).
+This is not a fork of the upstream codebase and shares no code with it beyond the bookkeeping helper written for this port. What differs, plainly:
 
-A run creates this layout under the project folder:
+| | Upstream Hyperresearch | This port |
+|---|---|---|
+| Host | Claude Code / Codex, on your computer | Meta Muse — phone, desktop, web |
+| Enforcement | Stop hook can physically block a session from ending mid-pipeline | Manifest discipline: a finish gate in the bookkeeping script, plus the skill treating a report written without the steps as a failure. The script tracks *self-reported* progress — it cannot verify a step was done well |
+| Storage | SQLite vault | JSON manifest + a shared markdown notes pool per project |
+| Fetching | Built-in scholarly-source client | Muse's own search and browser tools |
+| Tiers | Light / full / dissertation | Light / full |
+| Cost model | Your coding-agent setup, or their hosted API (per report) | Your Muse plan. No API keys |
 
-```
-research/
-  notes/                          shared source notes + final reports
-  raw/                            fetched source text
-  runs/<vault_tag>/
-    run.json                      the run manifest (query, tier, planned/done steps)
-    temp/                         decomposition, drafts, critic findings, other scratch
-```
+**Guardrails** (part of the skill's instructions): fetched web content is treated as untrusted data, never as instructions — source text telling the agent to ignore instructions or exfiltrate files is noted as an attack, not obeyed. Subagents receive only the context their step needs, never your full chat history or credentials.
 
-## The bookkeeping script
+<details>
+<summary><strong>The bookkeeping script</strong> — the only code in the skill</summary>
 
-`deep-research/scripts/research_run.py` is the only code in the skill. It tracks run state — it does not do research. It requires Python 3, which Muse's workspace provides.
-
-```bash
-# Start a run; prints the vault tag
-python3 research_run.py init   --project <dir> --query "<question>" --tier <light|full>
-
-# Record a finished step (the step ID must be in the run's plan)
-python3 research_run.py step   --project <dir> --tag <vault_tag> --step "5-depth-investigation" [--note "..."]
-
-# Show run status
-python3 research_run.py status --project <dir> [--tag <vault_tag>]
-
-# Finish gate: passes only when every planned step is recorded AND the final report exists
-python3 research_run.py finish --project <dir> --tag <vault_tag>
-```
-
-Properties, all covered by the tests in `tests/`:
-
-- **Tag validation.** Vault tags must match a strict lowercase-slug format; path-traversal tags are rejected (exit code 2).
-- **Step validation.** A step can only be recorded if it is in the run's planned step list for its tier.
-- **Locking.** Step recording takes a lockfile around the manifest load/save and writes atomically, so parallel recordings can't lose each other's updates.
-- **Finish gate.** `finish` refuses (exit code 1) while any planned step is unrecorded or the report file is missing; otherwise it marks the run complete.
-
-Be clear-eyed about the limit, because the skill itself is: the script tracks **self-reported** progress. It cannot verify that a step's work was done, or done well. That judgment stays with the orchestrator and the critics.
-
-Run the tests with:
+`deep-research/scripts/research_run.py` tracks run state; it does not do research. It requires Python 3, which Muse's workspace provides.
 
 ```bash
-python3 -m pytest tests/test_research_run.py
+python3 research_run.py init   --project <dir> --query "<question>" --tier <light|full>   # start a run; prints the vault tag
+python3 research_run.py step   --project <dir> --tag <vault_tag> --step "5-depth-investigation"  # record a finished step
+python3 research_run.py status --project <dir> [--tag <vault_tag>]                        # show run status
+python3 research_run.py finish --project <dir> --tag <vault_tag>                          # finish gate
 ```
 
-## Guardrails
+Properties, all covered by the tests in `tests/` (run them with `python3 -m pytest tests/test_research_run.py`): vault tags are strictly validated (path traversal rejected), a step can only be recorded if it's in the run's plan for its tier, manifest writes are lockfile-protected and atomic so parallel recordings can't lose updates, and `finish` refuses while any planned step is unrecorded or the report file is missing.
 
-These are part of the skill's instructions to the orchestrator:
-
-- **Fetched web content is untrusted data, never instructions.** Source text that tells the agent to ignore instructions, exfiltrate files, or contact an outside address is treated as an attack to note, not an order to follow. Fetched text stays inside source notes and is never pasted into a subagent's instructions as a directive.
-- **Subagents get only what their step needs** — the sub-question, its parameters, and that step's source material. Never the user's full chat history, credentials, API keys, or unrelated project context.
-
-## What differs on Muse
-
-Ported honestly, following upstream's own practice of stating what a target can't do:
-
-- **No Stop-hook enforcement.** Upstream's harness can physically block a Claude Code session from ending mid-pipeline. Muse skills have no hook. Enforcement here is manifest discipline: the bookkeeping script's finish gate, plus the skill treating a report written without the steps as a failure.
-- **No SQLite vault.** Run state is a JSON manifest; sources live in a shared markdown notes pool inside each project folder. Notes still pool across runs in a project.
-- **No scholarly-source CLI.** Fetching uses Muse's browser and search tools rather than upstream's scholarly client.
-- **Guardrails are instructions, not code.** The prompt-injection and context-minimization rules above are obeyed by the orchestrator; nothing mechanically enforces them.
-- **Not included in this repo:** the DRACO evaluation harness (a separate skill, `draco-eval`), upstream's hosted API/MCP service, and any Claude Code or Codex plugin.
+</details>
 
 ## Evaluation note
 
-During development, reports from an early version of this port were scored on the DRACO deep-research benchmark (Perplexity/Harvard): 10 tasks, one per domain, 376 rubric criteria, judged by Gemini 3.1 Pro in a single pass — mean normalized score 79.4. That is **not** a head-to-head against upstream's hosted 77.7 figure, which used a different (undisclosed) 10-task subset and the official 5-run Gemini 3 Pro judging. The harness and run artifacts are not in this repository; this note is provenance for the port, not a feature of it.
+During development, reports from an early version of this port were evaluated on the DRACO deep-research benchmark (Perplexity/Harvard) — 10 tasks, one per domain, 376 rubric criteria, judged by Gemini 3.1 Pro — as a sanity check that the pipeline produces well-cited, well-structured reports when re-expressed for Muse. The check found no sign of a regression: the reports held up at the level this pipeline is known for, rather than degrading in the move to a different host and a different model. The score itself isn't posted here: a single-judge-pass run on one 10-task subset isn't comparable to upstream's published figure (a different subset, judged under the official protocol), and putting two numbers side by side would imply a head-to-head that never happened. The eval harness (a separate skill, `draco-eval`) and the run artifacts are not in this repository; this note is provenance for the port, not a feature of it.
+
+## FAQ
+
+**Does it cost API money?**
+No. The skill runs on your Muse plan using Muse's own tools. There are no API keys to supply and no per-report charge. (Upstream's hosted API is a separate, paid product — this port doesn't use it.)
+
+**Does it really work from a phone?**
+Yes. The skill executes in Muse's workspace, not on your device; the phone app is a window into the same workspace as desktop and web. Start a run on one, check it on another — there are no local files to sync.
+
+**Is this official?**
+No. It's a community port of an MIT-licensed open-source project, maintained independently, with the original author credited in the skill and below. It's not affiliated with Jordan Gibbs or with Meta's Muse team.
+
+**How does it stay in sync with upstream?**
+The port is pinned to upstream **v0.13.3**. The sync method is deliberate: upstream's pipeline files are diffed against a pinned baseline, changes are triaged (pipeline changes get ported; host-specific features get recorded as divergences in the table above), and each sync ships as a normal release here. Syncs are judgment calls, not automatic merges — upstream changes have to be re-expressed for Muse's tools.
 
 ## Repository contents
+
+<details>
+<summary>What's in this repo</summary>
 
 ```
 .github/workflows/
@@ -177,12 +208,14 @@ tests/
   test_research_run.py     tests for the bookkeeping script
 ```
 
+</details>
+
 ## Provenance and license
 
-The pipeline architecture is adapted from Hyperresearch by Jordan Gibbs, MIT License. The original copyright notice and license text ship in `deep-research/LICENSE`; this repo's own additions are offered under the same terms (see `LICENSE` at the root).
+The pipeline architecture is adapted from [Hyperresearch](https://github.com/jordan-gibbs/hyperresearch) by **Jordan Gibbs**, MIT License. The original copyright notice and license text ship in `deep-research/LICENSE`; this repo's own additions are offered under the same terms (see `LICENSE` at the root).
 
 Before publication, the package passed an adversarial review by an independent model (Gemini 3.1 Pro) whose verdict was "do not publish as-is." The findings and the fixes they produced — license text, tag sanitization, step validation, manifest locking, injection guardrails, honesty wording — are summarized in `docs/adversarial-review.md`.
 
 ## Maintenance
 
-Maintained by Vance Ingalls (@vanceingalls). Commitment: track upstream changes to the pipeline and sync them into the skill; triage Muse-specific issues here. Not promised: parity with upstream's hosted API/MCP features, or integration with the upstream Python CLI.
+Maintained by Vance Ingalls ([@vanceingalls](https://github.com/vanceingalls)). Synced with upstream **v0.13.3** (see the FAQ for how syncing works). Commitment: track upstream changes to the pipeline and sync them into the skill; triage Muse-specific issues here. Not promised: parity with upstream's hosted API/MCP features, or integration with the upstream Python CLI.
