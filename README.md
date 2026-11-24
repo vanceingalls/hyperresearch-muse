@@ -71,63 +71,14 @@ Other shapes of question it handles: **Fact-check a claim** ("Did X really say Y
 
 ## How it works
 
-When you ask for deep research, Muse acts as the **orchestrator**: it sequences the steps below, spawns subagents for the steps that call for them, and records progress. It does not do a step's research or drafting itself when the step assigns that work to subagents, and it loads one step's procedure at a time from `deep-research/references/pipeline-steps.md`.
+When you ask for deep research, Muse acts as the **orchestrator**: it sequences the pipeline's steps, spawns subagents for the steps that call for them, and records progress. It does not do a step's research or drafting itself when the step assigns that work to subagents, and it loads one step's procedure at a time from `deep-research/references/pipeline-steps.md`.
 
-```mermaid
-flowchart TB
-    subgraph frame["Frame the question"]
-        direction LR
-        A["1 · Decompose"] --> B["2 · Width sweep"]
-    end
-    subgraph investigate["Investigate"]
-        direction LR
-        C["3 · Contradiction graph"] --> D["4 · Loci analysis"] --> E["5 · Depth investigation"]
-        E --> F["6 · Reconcile"] --> G["7 · Source tensions"]
-    end
-    subgraph draft["Build the draft"]
-        direction LR
-        H["8 · Corpus critic"] --> I["9 · Evidence digest"] --> J["10 · Triple draft"] --> K["11 · Synthesize"]
-    end
-    subgraph attack["Attack and repair"]
-        direction LR
-        L["12 · Critics ×4"] --> M["13 · Gap fetch"] --> N["14 · Patcher"] --> O["14.5 · Cite check"]
-    end
-    subgraph finish["Finish"]
-        direction LR
-        P["15 · Polish"] --> Q["16 · Readability audit"]
-    end
-    frame --> investigate --> draft --> attack --> finish
-```
+The pipeline runs in five phases — **Frame the question → Investigate → Build the draft → Attack and repair → Finish**. The step-by-step detail belongs to the main project: [The 16-step research pipeline](https://github.com/jordan-gibbs/hyperresearch#the-16-step-research-pipeline) in the upstream README is the authoritative walkthrough, and this port follows it (with the cite-check counted as step 14.5, as upstream does).
 
 Two tiers, chosen when the run starts:
 
-- **Light** — steps 1, 2, 10, 15, 16. For narrow factual questions; the triple draft works directly from the width-sweep notes.
-- **Full** — the complete sequence above (steps 1–16 plus the inserted 14.5 cite-check). The default for contested, multi-part, or high-stakes questions.
-
-<details>
-<summary><strong>Every step, in order</strong> — job, and what it produces</summary>
-
-| Step | What happens |
-|---|---|
-| 1. Decompose | The question becomes a canonical query, atomic sub-questions, and a coverage matrix. |
-| 2. Width sweep | Parallel fetcher subagents search several angles and write source notes (claim, evidence, verbatim quote, source name, URL, date) into the project's shared notes pool. |
-| 3. Contradiction graph | Notes that disagree are paired and clustered into ranked fights. |
-| 4. Loci analysis | The distinct positions the answer must compare are identified, scored by evidence strength, and given source budgets. |
-| 5. Depth investigation | One investigator subagent per locus, in parallel. Each must commit to a position with cited evidence — a both-sides summary fails the step. |
-| 6. Cross-locus reconcile | Committed positions are compared; conflicts are resolved with evidence or flagged as genuinely open. |
-| 7. Source tensions | The expert disagreements themselves are extracted as findings, with both camps and their strongest sources. |
-| 8. Corpus critic | The corpus is attacked before drafting: what's missing, what's over-weighted, what would overturn the emerging answer. Worst gaps are fetched or recorded as limitations. |
-| 9. Evidence digest | The top claims the report will make, each backed by verbatim quotes and citations. |
-| 10. Triple draft | Three drafter subagents in parallel write complete drafts from different angles (e.g. evidence-first, comparison-first, skeptic-first). |
-| 11. Synthesize | A synthesizer writes the final report in two passes — outline mapped to the evidence digest, then full text. |
-| 12. Critics | Four critic subagents in parallel, one lens each: factual accuracy, coverage against the step 1 matrix, citation integrity, logical coherence. Findings must name concrete defects with locations. |
-| 13. Gap fetch | Sources are fetched for the gaps the critics found, or the gap is recorded as unresolvable. |
-| 14. Patcher | One patcher applies surgical edits for every accepted critic finding — no full rewrites. Rejected findings need a stated reason. |
-| 14.5. Cite check | Each citation is verified against the sentence it supports; failing citations are rebound, replaced, or deleted. |
-| 15. Polish | Hygiene pass: structure, headings, citation format, repetition. |
-| 16. Readability audit | A fresh-reader pass scores clarity and suggests concrete fixes; only substance-preserving suggestions are applied. The run's finish gate is checked at the end of this step. |
-
-</details>
+- **Light** — a five-step short path (decompose, width sweep, draft, polish, readability audit). For narrow factual questions.
+- **Full** — the complete pipeline. The default for contested, multi-part, or high-stakes questions.
 
 ### What you get back
 
