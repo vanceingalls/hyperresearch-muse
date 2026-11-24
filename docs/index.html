@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hyperresearch-muse — Deep research for Meta Muse</title>
+<meta name="description" content="A community port of Hyperresearch by Jordan Gibbs for Meta Muse. Deep research that decomposes, cross-examines, and cite-checks itself — on your phone, desktop, or web. No API keys.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hyperresearch-muse">
+<meta property="og:description" content="Deep research that survives cross-examination — now running inside Muse. A community port of Hyperresearch by Jordan Gibbs.">
+<meta property="og:url" content="https://vanceingalls.github.io/hyperresearch-muse/">
+<meta property="og:image" content="https://vanceingalls.github.io/hyperresearch-muse/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hyperresearch-muse">
+<meta name="twitter:description" content="Deep research that survives cross-examination — now running inside Muse.">
+<meta name="twitter:image" content="https://vanceingalls.github.io/hyperresearch-muse/og.png">
+<style>
+  :root{
+    --ink:#1A1F2E; --body:#3D4A5C; --paper:#F5F7FA; --accent:#6B8FBF;
+    --accent-dark:#4a6f9c; --line:#d9e0ea; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+       background:var(--paper);color:var(--body);line-height:1.6}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  header{padding:72px 0 8px;text-align:center}
+  h1{color:var(--ink);font-size:2.6rem;margin:0 0 10px;letter-spacing:-.02em}
+  .tagline{font-size:1.25rem;color:var(--ink);margin:0 0 6px;font-weight:600}
+  .sub{max-width:640px;margin:0 auto 26px}
+  .badges{margin:0 0 30px;font-size:.85rem}
+  .badges span{display:inline-block;border:1px solid var(--line);background:var(--card);
+    border-radius:999px;padding:3px 12px;margin:2px 3px;color:var(--body)}
+  .ctas a{display:inline-block;margin:4px 6px;padding:12px 22px;border-radius:8px;
+    text-decoration:none;font-weight:600;font-size:1rem}
+  .cta-primary{background:var(--accent);color:#fff}
+  .cta-primary:hover{background:var(--accent-dark)}
+  .cta-ghost{border:1px solid var(--accent);color:var(--accent-dark);background:transparent}
+  section{padding:34px 0 6px}
+  h2{color:var(--ink);font-size:1.55rem;margin:0 0 12px;letter-spacing:-.01em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+  pre{background:var(--ink);color:#e8edf4;border-radius:10px;padding:18px 20px;overflow-x:auto;
+      font-size:.86rem;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+  .copyrow{text-align:right;margin-top:-6px}
+  button.copy{background:var(--card);border:1px solid var(--accent);color:var(--accent-dark);
+    border-radius:6px;padding:6px 14px;font-size:.85rem;cursor:pointer;font-weight:600}
+  blockquote{margin:0;border-left:4px solid var(--accent);padding:2px 0 2px 18px}
+  blockquote h3{color:var(--ink);margin:10px 0 6px;font-size:1.05rem}
+  blockquote p{margin:6px 0}
+  .q{color:var(--ink);font-weight:600}
+  table{border-collapse:collapse;width:100%;background:var(--card)}
+  th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;font-size:.95rem}
+  th{color:var(--ink);background:var(--paper)}
+  .steps{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+  .steps span{background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:3px 10px;font-size:.82rem;color:var(--body)}
+  .steps b{color:var(--accent-dark)}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding:30px 0 54px;text-align:center}
+  footer .ctas{margin-bottom:14px}
+  .small{font-size:.88rem}
+  a{color:var(--accent-dark)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>hyperresearch-muse</h1>
+  <p class="tagline">Deep research that survives cross-examination — now running inside Muse.</p>
+  <p class="sub">Instead of answering from one pass of searching, it decomposes your question, sweeps sources from several angles, sends investigators to argue positions, drafts the answer three ways — then attacks the result with four critics before patching and cite-checking it.</p>
+  <p class="badges">
+    <span>Port of Hyperresearch v0.13.3</span><span>MIT</span><span>No API keys</span><span>Phone · desktop · web</span>
+  </p>
+  <div class="ctas">
+    <a class="cta-primary" href="https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip">Download the skill</a>
+    <a class="cta-ghost" href="https://github.com/vanceingalls/hyperresearch-muse">View on GitHub</a>
+  </div>
+</header>
+
+<section>
+  <h2>Install in one paste</h2>
+  <p>Copy this prompt into any chat with your Muse — in the app on mobile, desktop, or web. Nothing installs on your device; the skill lives in Muse's workspace, so a research run you start on your phone is waiting in the same chat on your desktop. Paste the same prompt again later to upgrade.</p>
+  <pre id="prompt">Install the Deep Research skill for me from its GitHub repo.
+
+1. Download the latest release package from:
+   https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip
+2. Unzip it. Inside is a single folder named "deep-research".
+3. Put that folder in my custom skills folder (~/workspace/custom-skills/), so that
+   ~/workspace/custom-skills/deep-research/SKILL.md exists, with skill.yaml, LICENSE,
+   the references/ folder, and the scripts/ folder intact. If an older deep-research
+   folder is already there, replace it — treat this as an upgrade.
+4. Verify the install: list the installed files, and run
+   python3 ~/workspace/custom-skills/deep-research/scripts/research_run.py --help
+   to confirm the bookkeeping script runs.
+5. Confirm back to me: the skill's name (deep_research, "Deep Research"), what it does
+   in a sentence or two, its two tiers (light and full), and that it needs no API keys.
+   Tell me I can start by asking you for deep research on any question.</pre>
+  <div class="copyrow"><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.textContent='Copied ✓'}).catch(()=>{this.textContent='Select & copy manually'})">Copy the prompt</button></div>
+</section>
+
+<section>
+  <h2>What a run looks like</h2>
+  <p class="q">The question: “My breathing gets worse within minutes of using my new blue rescue inhaler, and my home oxygen readings have dropped from about 95% to 91%. Should I just stop using it?”</p>
+  <div class="card">
+    <blockquote>
+      <h3>The short answer</h3>
+      <p>No — this does not sound like a normal “adjustment period,” and you should not simply push through it. A rescue inhaler (typically albuterol/salbutamol, a short-acting beta-agonist) is supposed to relieve wheezing and chest tightness within minutes. Getting <em>worse</em> within minutes of using it, repeatedly, over three weeks — together with home oxygen readings falling from your usual ~95% to 91% — is a pattern that needs <strong>urgent, same-day medical attention…</strong></p>
+      <h3>Paradoxical bronchospasm — the inhaler narrowing the airways instead of opening them</h3>
+      <p>The FDA-approved prescribing information for albuterol sulfate inhalation aerosol states that it “can produce paradoxical bronchospasm, which may be life threatening,” that if it occurs the inhaler “should be discontinued immediately and alternative therapy should be instituted,” and that it “frequently occurs with the first use of a new canister.” (DailyMed, Albuterol Sulfate Inhalation Aerosol label)</p>
+    </blockquote>
+  </div>
+  <p>Every claim in a full report is tied to a source like that one — a verbatim quote, a source name, and a URL. Claims that can't be tied down get flagged, not smoothed over.</p>
+  <p class="small">The pipeline runs in five phases — <strong>Frame the question → Investigate → Build the draft → Attack and repair → Finish</strong> — in two tiers: <strong>light</strong>, a five-step short path for narrow factual questions, and <strong>full</strong> for contested, multi-part, or high-stakes ones. Step-by-step detail lives in the <a href="https://github.com/jordan-gibbs/hyperresearch#the-16-step-research-pipeline">upstream project's pipeline documentation</a>.</p>
+</section>
+
+<section>
+  <h2>Checked, not just generated</h2>
+  <p>During development, reports from an early version of this port were evaluated on the DRACO deep-research benchmark (Perplexity/Harvard) — 10 tasks, one per domain, 376 rubric criteria, judged by Gemini 3.1 Pro. The check found no sign of a regression: the reports held up at the level this pipeline is known for, rather than degrading in the move to a different host and a different model. The score itself isn't posted — a single-judge-pass run on one subset isn't comparable to the original's published figure, and printing two numbers side by side would imply a head-to-head that never happened.</p>
+</section>
+
+<section>
+  <h2>Honest differences</h2>
+  <table>
+    <tr><th></th><th>Upstream Hyperresearch</th><th>This port</th></tr>
+    <tr><td><strong>Host</strong></td><td>Claude Code / Codex, on your computer</td><td>Meta Muse — phone, desktop, web</td></tr>
+    <tr><td><strong>Enforcement</strong></td><td>A Stop hook can physically block a session from ending mid-pipeline</td><td>Manifest discipline and a finish gate. The bookkeeping tracks <em>self-reported</em> progress — it cannot verify a step was done well</td></tr>
+    <tr><td><strong>Storage</strong></td><td>SQLite vault</td><td>JSON manifest + a shared markdown notes pool per project</td></tr>
+    <tr><td><strong>Tiers</strong></td><td>Light / full / dissertation</td><td>Light / full</td></tr>
+    <tr><td><strong>Cost</strong></td><td>Your coding-agent setup, or their hosted API (per report)</td><td>Your Muse plan. No API keys</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Credit</h2>
+  <div class="card">
+    <p style="margin-top:0">The pipeline architecture is <strong><a href="https://github.com/jordan-gibbs/hyperresearch">Hyperresearch</a> by Jordan Gibbs</strong>, MIT-licensed open source. This is an independent community port that re-expresses it for Muse's tools — it shares no code with the original beyond a bookkeeping helper written for the port, and it is not affiliated with Jordan Gibbs or with Meta's Muse team. If you want the original for Claude Code or Codex, his repo is the place.</p>
+    <p style="margin-bottom:0">Before publication, this package passed an adversarial review by an independent model whose verdict was “do not publish as-is” — the findings and fixes are documented in the repo.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="ctas">
+    <a class="cta-primary" href="https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip">Download the skill</a>
+    <a class="cta-ghost" href="https://github.com/vanceingalls/hyperresearch-muse">View on GitHub</a>
+  </div>
+  <p class="small">hyperresearch-muse · maintained by <a href="https://github.com/vanceingalls">Vance Ingalls</a> · synced with upstream v0.13.3 · MIT</p>
+</footer>
+
+</div>
+</body>
+</html>
