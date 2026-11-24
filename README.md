@@ -8,6 +8,30 @@ It is not a fork of the upstream codebase and shares no code with it beyond the 
 
 ## Install
 
+**Option A — let Muse fetch it (easiest, works from mobile).** Paste this prompt into any chat with your Muse — it's also kept in [INSTALL-PROMPT.md](INSTALL-PROMPT.md):
+
+```
+Install the Deep Research skill for me from its GitHub repo.
+
+1. Download the latest release package from:
+   https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip
+2. Unzip it. Inside is a single folder named "deep-research".
+3. Put that folder in my custom skills folder (~/workspace/custom-skills/), so that
+   ~/workspace/custom-skills/deep-research/SKILL.md exists, with skill.yaml, LICENSE,
+   the references/ folder, and the scripts/ folder intact. If an older deep-research
+   folder is already there, replace it — treat this as an upgrade.
+4. Verify the install: list the installed files, and run
+   python3 ~/workspace/custom-skills/deep-research/scripts/research_run.py --help
+   to confirm the bookkeeping script runs.
+5. Confirm back to me: the skill's name (deep_research, "Deep Research"), what it does
+   in a sentence or two, its two tiers (light and full), and that it needs no API keys.
+   Tell me I can start by asking you for deep research on any question.
+```
+
+Pasting the same prompt again later upgrades you to the newest version.
+
+**Option B — attach the zip yourself.**
+
 1. Download the skill zip from the rolling release: **[deep-research-skill.zip](https://github.com/vanceingalls/hyperresearch-muse/releases/download/latest/deep-research-skill.zip)**. It contains the `deep-research/` folder and is rebuilt automatically on every push to `main`, so that link always serves the current version. (Alternatively, download this repository as a zip and use the `deep-research/` folder inside it.)
 2. Start a chat with your Muse (phone, desktop, or web), attach the zip, and paste:
 
@@ -135,6 +159,7 @@ During development, reports from an early version of this port were scored on th
   release.yml              on push to main: rebuilds deep-research-skill.zip and
                            publishes it to the rolling "latest" release
 README.md                  this file
+INSTALL-PROMPT.md          a paste-in prompt that makes Muse fetch and install the skill itself
 LICENSE                    MIT license for this repo's additions
 deep-research/             the Muse skill (the installable unit)
   SKILL.md                 orchestrator playbook
