@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="#install">Install</a> · <a href="#see-a-run">See a run</a> · <a href="#how-it-works">How it works</a> · <a href="#upstream-vs-this-port">Differences</a> · <a href="#evaluation-note">Evaluation</a> · <a href="#faq">FAQ</a>
+  <a href="https://vanceingalls.github.io/hyperresearch-muse/">Website</a> · <a href="#install">Install</a> · <a href="#see-a-run">See a run</a> · <a href="#how-it-works">How it works</a> · <a href="#upstream-vs-this-port">Differences</a> · <a href="#evaluation-note">Evaluation</a> · <a href="#faq">FAQ</a>
 </p>
 
 ## What is this?
@@ -158,6 +158,9 @@ deep-research/             the Muse skill (the installable unit)
   scripts/
     research_run.py        run bookkeeping: init / step / status / finish
 docs/
+  index.html               the project home page (GitHub Pages, served from this folder)
+  og.png                   1200×630 share image for the home page
+  .nojekyll                serve the docs folder as-is, no Jekyll processing
   adversarial-review.md    pre-publication adversarial review: findings and fixes
   upstream-issue.md        draft of the proposal issue posted upstream
   upstream-pr.md           draft of the follow-up docs PR (Community Ports link)
