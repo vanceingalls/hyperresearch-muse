@@ -74,23 +74,29 @@ Other shapes of question it handles: **Fact-check a claim** ("Did X really say Y
 When you ask for deep research, Muse acts as the **orchestrator**: it sequences the steps below, spawns subagents for the steps that call for them, and records progress. It does not do a step's research or drafting itself when the step assigns that work to subagents, and it loads one step's procedure at a time from `deep-research/references/pipeline-steps.md`.
 
 ```mermaid
-flowchart LR
-    A["1 · Decompose"] --> B["2 · Width sweep"]
-    B --> C["3 · Contradiction graph"]
-    C --> D["4 · Loci analysis"]
-    D --> E["5 · Depth investigation"]
-    E --> F["6 · Reconcile"]
-    F --> G["7 · Source tensions"]
-    G --> H["8 · Corpus critic"]
-    H --> I["9 · Evidence digest"]
-    I --> J["10 · Triple draft"]
-    J --> K["11 · Synthesize"]
-    K --> L["12 · Critics ×4"]
-    L --> M["13 · Gap fetch"]
-    M --> N["14 · Patcher"]
-    N --> O["14.5 · Cite check"]
-    O --> P["15 · Polish"]
-    P --> Q["16 · Readability audit"]
+flowchart TB
+    subgraph frame["Frame the question"]
+        direction LR
+        A["1 · Decompose"] --> B["2 · Width sweep"]
+    end
+    subgraph investigate["Investigate"]
+        direction LR
+        C["3 · Contradiction graph"] --> D["4 · Loci analysis"] --> E["5 · Depth investigation"]
+        E --> F["6 · Reconcile"] --> G["7 · Source tensions"]
+    end
+    subgraph draft["Build the draft"]
+        direction LR
+        H["8 · Corpus critic"] --> I["9 · Evidence digest"] --> J["10 · Triple draft"] --> K["11 · Synthesize"]
+    end
+    subgraph attack["Attack and repair"]
+        direction LR
+        L["12 · Critics ×4"] --> M["13 · Gap fetch"] --> N["14 · Patcher"] --> O["14.5 · Cite check"]
+    end
+    subgraph finish["Finish"]
+        direction LR
+        P["15 · Polish"] --> Q["16 · Readability audit"]
+    end
+    frame --> investigate --> draft --> attack --> finish
 ```
 
 Two tiers, chosen when the run starts:
